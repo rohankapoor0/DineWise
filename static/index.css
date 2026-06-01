@@ -1,0 +1,564 @@
+/* --- Culinary Intelligence Design Token System --- */
+
+:root {
+    /* Colors */
+    --primary: #b90027;              /* Tomato Red */
+    --primary-container: #e31837;    /* Active Tomato Red */
+    --secondary: #835500;            /* Crust Gold */
+    --secondary-container: #feae2c;  /* Toasted Amber rating */
+    --tertiary: #386631;             /* Basil Green */
+    --tertiary-container: #507f47;   /* Success Green */
+    --background: #f8f9fa;           /* Soft Page Background */
+    --surface: #ffffff;              /* Card Background */
+    --surface-tint: #f3f4f5;         /* Soft Gray Surface (Low) */
+    --surface-container: #edeeef;    /* Mid-Gray Surface */
+    
+    --on-surface: #191c1d;           /* Deep Charcoal Ink */
+    --on-surface-variant: #5d3f3e;   /* Soft Brownish Charcoal */
+    --outline: rgba(145, 110, 109, 0.15); /* Whisper of a boundary */
+    
+    /* Shapes */
+    --rounded-sm: 4px;
+    --rounded-md: 8px;               /* Button, Small Card */
+    --rounded-lg: 16px;              /* Featured/AI Cards */
+    --rounded-xl: 24px;              /* Main Sections */
+    --rounded-full: 9999px;          /* Badges, Chips */
+    
+    /* Spacing */
+    --base-space: 8px;
+    --transition-speed: 300ms;
+}
+
+/* --- Base Resets --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--on-surface);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding-top: 80px; /* Offset for floating header */
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: 40px;
+    letter-spacing: -0.02em;
+    color: var(--on-surface);
+}
+
+p {
+    color: var(--on-surface-variant);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* --- Floating Glassmorphic Header --- */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--outline);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.logo-accent {
+    color: var(--primary);
+}
+
+.ai-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--surface-tint);
+    padding: 6px 12px;
+    border-radius: var(--rounded-full);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #727785;
+}
+
+.status-indicator.active {
+    background-color: var(--tertiary);
+    box-shadow: 0 0 8px var(--tertiary-container);
+}
+
+.status-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+}
+
+/* --- Main Layout Container --- */
+.app-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.hero-badge {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    background-color: rgba(185, 0, 39, 0.08);
+    padding: 4px 12px;
+    border-radius: var(--rounded-full);
+}
+
+.hero-section p {
+    font-size: 18px;
+    max-width: 700px;
+}
+
+/* --- Interactive Section --- */
+.interactive-section {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: var(--surface);
+    border-radius: var(--rounded-lg);
+    box-shadow: 0 4px 20px rgba(25, 28, 29, 0.03);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Suggestions Wrapper */
+.suggestions-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.suggestions-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--on-surface-variant);
+}
+
+.suggestions-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.suggestion-chip {
+    background-color: var(--surface-tint);
+    border: none;
+    outline: none;
+    color: var(--on-surface);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: var(--rounded-full);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.suggestion-chip:hover {
+    background-color: var(--surface-container);
+    transform: translateY(-1px);
+}
+
+.suggestion-chip:active {
+    transform: translateY(0);
+}
+
+/* Search Bar Input Container */
+.search-bar-container {
+    width: 100%;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--surface-tint);
+    border-radius: var(--rounded-md);
+    padding: 4px;
+    border: 1px solid transparent;
+    transition: border-color var(--transition-speed), background-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.search-input-wrapper:focus-within {
+    background-color: var(--surface);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(185, 0, 39, 0.08);
+}
+
+#query-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: var(--on-surface);
+}
+
+#query-input::placeholder {
+    color: var(--on-surface-variant);
+    opacity: 0.65;
+}
+
+.search-btn {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+    border: none;
+    outline: none;
+    color: var(--surface);
+    width: 48px;
+    height: 48px;
+    border-radius: var(--rounded-md);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-speed), filter var(--transition-speed);
+}
+
+.search-btn:hover {
+    filter: brightness(1.08);
+    transform: scale(1.02);
+}
+
+.search-btn:active {
+    transform: scale(0.98);
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* --- Results Panel --- */
+.results-panel {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Loader / Skeleton --- */
+.loader {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: var(--surface);
+    padding: 32px;
+    border-radius: var(--rounded-lg);
+    box-shadow: 0 4px 20px rgba(25, 28, 29, 0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.loader-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(185, 0, 39, 0.1);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 800ms infinite linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.skeleton-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton {
+    background-color: var(--surface-tint);
+    border-radius: var(--rounded-sm);
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-title {
+    width: 40%;
+    height: 24px;
+    margin-bottom: 8px;
+}
+
+.skeleton-line {
+    width: 100%;
+    height: 16px;
+}
+
+.skeleton-line-short {
+    width: 75%;
+    height: 16px;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* --- Error Banner --- */
+.error-banner {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: rgba(186, 26, 26, 0.05);
+    border-left: 4px solid #ba1a1a;
+    padding: 16px 20px;
+    border-radius: 0 var(--rounded-md) var(--rounded-md) 0;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.error-icon {
+    font-size: 20px;
+}
+
+.error-content h4 {
+    color: #ba1a1a;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.error-content p {
+    color: #533f3e;
+    font-size: 14px;
+}
+
+/* --- Results Content Grid (Asymmetrical Layout) --- */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* AI Insight Card (Culinary Intelligence Style) */
+.ai-insight-card {
+    background-color: #f0f7f0; /* Light Basil green background */
+    border-left: 4px solid var(--tertiary); /* Basil Green accent border */
+    border-radius: 0 var(--rounded-lg) var(--rounded-lg) 0;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(56, 102, 49, 0.04);
+}
+
+.card-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--tertiary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+}
+
+.ai-insight-card h2 {
+    font-size: 26px;
+    margin-bottom: 16px;
+    color: var(--on-surface);
+}
+
+.ai-response-content {
+    color: var(--on-surface);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.ai-response-content p {
+    margin-bottom: 14px;
+    color: var(--on-surface); /* override variant color */
+}
+
+/* Source Reviews Column */
+.source-reviews-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.column-header h3 {
+    font-size: 18px;
+    color: var(--on-surface);
+}
+
+.reviews-count {
+    font-size: 12px;
+    font-weight: 600;
+    background-color: var(--surface-tint);
+    padding: 4px 10px;
+    border-radius: var(--rounded-full);
+    color: var(--on-surface-variant);
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Custom Scrollbar for Reviews */
+.reviews-list::-webkit-scrollbar {
+    width: 6px;
+}
+.reviews-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+.reviews-list::-webkit-scrollbar-thumb {
+    background: var(--surface-container);
+    border-radius: var(--rounded-full);
+}
+
+/* Customer Review Card */
+.review-card {
+    background-color: var(--surface);
+    border-radius: var(--rounded-md);
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(25, 28, 29, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform var(--transition-speed);
+}
+
+.review-card:hover {
+    transform: translateY(-2px);
+}
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating-chip {
+    background-color: rgba(254, 174, 44, 0.1);
+    color: var(--secondary);
+    padding: 4px 10px;
+    border-radius: var(--rounded-full);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.star-icon {
+    font-size: 11px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: var(--on-surface-variant);
+}
+
+.review-text {
+    font-size: 14px;
+    color: var(--on-surface);
+    line-height: 1.5;
+}
+
+/* --- Footer --- */
+.app-footer {
+    width: 100%;
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--outline);
+    margin-top: 60px;
+}
+
+.app-footer p {
+    font-size: 13px;
+}

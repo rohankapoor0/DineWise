@@ -1,0 +1,21 @@
+# Virtual environment
+venv/
+ENV/
+env/
+.env
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local Vector Database & Caches
+chroma_langchain_db/
+.chroma/
+
+# Editor / OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
